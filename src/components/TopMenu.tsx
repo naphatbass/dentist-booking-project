@@ -12,7 +12,8 @@ export default async function TopMenu() {
         <div className={styles.topmenu}>
             <h1 className="text-3xl tracking-wide">CU Dentist</h1>
             <div className="flex flex-row items-center space-x-8">
-                <a href="./booking" className="text-lg">Booking</a>
+                <a href="./" className="text-lg">Home</a>
+                { session ? <a href="./booking" className="text-lg">Booking</a> : null }
                 {
                     session ? (
                         <a href="./api/auth/signout" className="text-lg">{ session.user?.name } Logout</a>
