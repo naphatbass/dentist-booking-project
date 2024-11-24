@@ -1,12 +1,30 @@
 import Image from 'next/image';
 import styles from './topmenu.module.css';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
-export default function TopMenu() {
+export default async function TopMenu() {
+
+    const session = await getServerSession(authOptions);
+    console.log('Session:', session);
+
     return (
         <div className={styles.topmenu}>
             <h1 className="text-3xl tracking-wide">CU Dentist</h1>
             <div className="flex flex-row items-center space-x-8">
                 <a href="./booking" className="text-lg">Booking</a>
+                {
+                    session ? (
+                        <a href="./api/auth/signout" className="text-lg">Logout</a>
+                    ) : (
+                        <a href="./api/auth/signin" className="text-lg">Login</a>
+                    )
+                }
+                {
+                    session ? (
+                        <p className="text-lg">{ session.user?.name }</p>
+                    ) : null
+                }
                 <Image src="/img/logo.png" alt="logo" width={75} height={75} />
             </div>
         </div>
