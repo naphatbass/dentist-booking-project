@@ -15,15 +15,10 @@ export default async function TopMenu() {
                 <a href="./booking" className="text-lg">Booking</a>
                 {
                     session ? (
-                        <a href="./api/auth/signout" className="text-lg">Logout</a>
+                        <a href="./api/auth/signout" className="text-lg">{ session.user?.name } Logout</a>
                     ) : (
                         <a href="./api/auth/signin" className="text-lg">Login</a>
                     )
-                }
-                {
-                    session ? (
-                        <p className="text-lg">{ session.user?.name }</p>
-                    ) : null
                 }
                 <Image src="/img/logo.png" alt="logo" width={75} height={75} />
             </div>
